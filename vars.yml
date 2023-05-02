@@ -1,6 +1,10 @@
+# MISC
+
+allow_restart: 'no'
+
 # SYSTEM
 
-hostname: '{{ inventory_hostname }}'
+hostname: 'server'
 
 timezone: America/New_York
 
@@ -27,5 +31,6 @@ essential_packages:
   - iperf3
   - stow
   - rsync
+  - python3-pip
 
 # DOCKER

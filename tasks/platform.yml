@@ -1,0 +1,10 @@
+---
+- name: Set amd64 arch
+  set_fact:
+    system_architecture: amd64
+  when: ansible_architecture == "x86_64"
+
+- name: Set arm64 arch
+  set_fact:
+    system_architecture: "arm64"
+  when: ansible_architecture == "aarch64"

@@ -10,3 +10,6 @@
     - samba
     - cockpit
     - docker
+
+  pre_tasks:
+    - import_tasks: tasks/platform.yml
