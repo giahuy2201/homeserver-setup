@@ -1,0 +1,8 @@
+---
+- name: restart libvirtd
+  service:
+    name: libvirtd
+    state: restarted
+
+- name: update grub
+  command: update-grub
