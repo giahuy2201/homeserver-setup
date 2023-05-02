@@ -1,0 +1,57 @@
+
+- name: Setup login user & groups
+  user:
+    name: "{{ username }}"
+    groups: 
+      - sudo
+    state: present
+    append: true
+
+- name: Allow sudo group to have passwordless sudo
+  template:
+    src: nopasswd
+    dest: /etc/sudoers.d/nopasswd
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Copy public SSH key 
+  authorized_key:
+    user: "{{ username }}"
+    key: "{{ lookup('file', '~/.ssh/{{ hostname }}.pub') }}"
+    state: present
+
+- name: Disable Root Login
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: '^PermitRootLogin'
+    line: "PermitRootLogin no"
+    state: present
+    backup: yes
+  notify:
+    - restart sshd
+
+- name: Enable SSH public key auth
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: '^PubkeyAuthentication'
+    line: "PubkeyAuthentication yes"
+    state: present
+    backup: yes
+  notify:
+    - restart sshd
+
+- name: Remove cloud-init SSH config
+  file:
+    path: /etc/ssh/sshd_config.d/50-cloud-init.conf
+    state: absent
+
+- name: Disable SSH password auth
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: '^PasswordAuthentication'
+    line: "PasswordAuthentication no"
+    state: present
+    backup: yes
+  notify:
+    - restart sshd

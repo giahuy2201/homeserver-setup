@@ -7,3 +7,4 @@
 
 - include_tasks: network.yml
 - include_tasks: dotfiles.yml
+- include_tasks: user.yml
