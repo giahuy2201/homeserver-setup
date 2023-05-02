@@ -1,11 +1,11 @@
 ---
 - name: Config netplan
-  template:
+  copy:
     src: netplan.yml
     dest: /etc/netplan/00-ansible.yaml
     owner: root
     group: root
     mode: 0644
   notify: apply netplan
-  
+
 - meta: flush_handlers

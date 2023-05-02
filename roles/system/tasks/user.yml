@@ -8,7 +8,7 @@
     append: true
 
 - name: Allow sudo group to have passwordless sudo
-  template:
+  copy:
     src: nopasswd
     dest: /etc/sudoers.d/nopasswd
     owner: root
