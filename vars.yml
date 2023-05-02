@@ -12,7 +12,20 @@ username: giahuy
 
 dotfiles_repo: https://github.com/giahuy2201/dotfiles
 
+# STORAGE
+
+drives:
+  - name: Data
+    uuid: 94eda7bd-e73b-456a-a0c0-514d69a3ad60
+  - name: Xpress
+    uuid: fe4baf42-0b08-479f-980a-0b0a31697c2b
+
 # NETWORKING
+
+nfs:
+  - name: raspberry
+    ip: 10.0.0.3
+    dir: '/home/pi'
 
 # PACKAGES
 

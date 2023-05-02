@@ -1,0 +1,16 @@
+---
+- name: Mount drives at boot
+  ansible.posix.mount:
+    path: '/mnt/{{ item.name }}'
+    src: 'UUID={{ item.uuid }}'
+    fstype: ext4
+    state: mounted
+  loop: '{{ drives }}'
+
+- name: Mount NFS volumes at boot
+  ansible.posix.mount:
+    path: '/mnt/{{ item.name }}'
+    src: '{{ item.ip }}:{{ item.dir }}'
+    fstype: nfs
+    state: mounted
+  loop: '{{ nfs }}'

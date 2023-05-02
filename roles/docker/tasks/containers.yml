@@ -2,7 +2,7 @@
 - name: Copy docker-compose file and containers data
   synchronize:
     src: '~/Sync/{{ hostname }}/{{ username }}/containers/'
-    dest: '/home/{{ username }}/containers'
+    dest: '/home/{{ username }}/containers/'
 
 - name: Set containers data permissions
   file:
