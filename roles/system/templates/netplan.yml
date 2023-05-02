@@ -1,0 +1,18 @@
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    eth0:
+      dhcp4: true
+      match:
+        macaddress: d8:5e:d3:8d:0c:28
+      set-name: eth0
+    eth1:
+      optional: true
+      dhcp4: true
+      match:
+        macaddress: d8:5e:d3:8d:0c:29
+      set-name: eth1
+    thunderbolt0:
+      addresses:
+        - 10.10.0.1/24
