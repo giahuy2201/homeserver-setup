@@ -2,6 +2,8 @@
 
 allow_restart: 'no'
 
+dotfiles_repo: https://github.com/giahuy2201/dotfiles
+
 # SYSTEM
 
 hostname: 'server'
@@ -10,8 +12,6 @@ timezone: America/New_York
 
 username: giahuy
 
-dotfiles_repo: https://github.com/giahuy2201/dotfiles
-
 # STORAGE
 
 drives:
@@ -19,6 +19,41 @@ drives:
     uuid: 94eda7bd-e73b-456a-a0c0-514d69a3ad60
   - name: Xpress
     uuid: fe4baf42-0b08-479f-980a-0b0a31697c2b
+
+# Samba
+samba_global_include: global-include.conf
+samba_apple_extensions: yes
+samba_server_string: 'NAS'
+samba_interfaces:
+  - eth0
+  - thunderbolt0
+samba_load_homes: true
+samba_netbios_name: '{{ hostname }}'
+
+samba_users:
+  - name: '{{ username }}'
+    password: '{{ password }}'
+samba_group: 'nasusers'
+
+samba_shares:
+  - name: Data
+    path: /mnt/Data
+    public: no
+    read_only: no
+    group: '{{ samba_group }}'
+    valid_users: '@{{ samba_group }}'
+    write_list: '@{{ samba_group }}'
+    create_mode: 0664
+    directory_mode: 0775
+  - name: Xpress
+    path: /mnt/Xpress
+    public: no
+    read_only: no
+    group: '{{ samba_group }}'
+    valid_users: '@{{ samba_group }}'
+    write_list: '@{{ samba_group }}'
+    create_mode: 0664
+    directory_mode: 0775
 
 # NETWORKING
 
@@ -39,11 +74,7 @@ essential_packages:
   - net-tools
   - smartmontools
   - unzip
-  - samba
-  - nfs-common
   - iperf3
   - stow
   - rsync
   - python3-pip
-
-# DOCKER

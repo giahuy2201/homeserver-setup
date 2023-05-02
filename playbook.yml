@@ -7,9 +7,9 @@
 
   roles:
     - system
-    - samba
     - cockpit
     - docker
+    - vladgh.samba.server
 
   pre_tasks:
     - import_tasks: tasks/platform.yml

@@ -1,9 +1,16 @@
+---
+- name: Add samba group
+  group:
+    name: "{{ samba_group }}"
+    state: present
+    gid: 1002
 
 - name: Setup login user & groups
   user:
     name: "{{ username }}"
     groups: 
       - sudo
+      - '{{ samba_group }}'
     state: present
     append: true
 

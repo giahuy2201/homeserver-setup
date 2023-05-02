@@ -1,4 +1,10 @@
 ---
+- name: Ensure nfs-common is installed
+  package:
+    name: nfs-common
+    state: present
+    update_cache: yes
+
 - name: Mount drives at boot
   ansible.posix.mount:
     path: '/mnt/{{ item.name }}'
