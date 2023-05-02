@@ -2,85 +2,10 @@
 - hosts: tester
   become: yes
 
+  vars_files:
+    - vars.yml
+
   tasks:
-    - name: Install enssential packages
-      package:
-        name:
-          - vim
-          - neofetch
-          - btop
-          - iftop
-          - powertop
-          - net-tools
-          - smartmontools
-          - unzip
-          - samba
-          - nfs-common
-          - iperf3
-        state: present
-        update_cache: yes
-
-    - name: Add Docker repo
-      block:
-        - name: Install required packages
-          package:
-            name:
-              - ca-certificates
-              - curl
-              - gnupg
-        - name: Create keyrings folder
-          file:
-            path: /etc/apt/keyrings
-            mode: '0755'
-            state: directory
-        - name: Get gpg key
-          apt_key:
-            url: https://download.docker.com/linux/ubuntu/gpg
-            keyring: /etc/apt/keyrings/docker.gpg
-        - name: Set key permission
-          file: 
-            dest: /etc/apt/keyrings/docker.gpg
-            mode: a+r
-        - name: Add source
-          block:
-            - name: Get architecture
-              block:
-                - command: dpkg --print-architecture
-                  register: dpkg
-                  changed_when: false
-                - set_fact:
-                    system_architecture: "{{ dpkg.stdout }}"
-            - name: Create docker.list
-              template:
-                src: templates/docker.list.j2
-                dest: /etc/apt/sources.list.d/docker.list
-
-    - name: Install Docker
-      package:
-        name:
-          - docker-ce 
-          - docker-ce-cli 
-          - containerd.io 
-          - docker-buildx-plugin
-          - docker-compose-plugin
-        state: present
-        update_cache: yes
-
-    - name: Install Cockpit
-      package:
-        name:
-          - cockpit
-        default_release: "{{ ansible_distribution_release }}"
-        state: present
-        update_cache: yes
-
-    - name: Install Cockpit Apps
-      package:
-        name:
-          - cockpit-pcp
-          - cockpit-machines
-          - qemu-kvm
-          - qemu-guest-agent
-        state: present
-        update_cache: yes
-        
+    - import_tasks: tasks/common.yml
+    - import_tasks: tasks/docker.yml
+    - import_tasks: tasks/cockpit.yml

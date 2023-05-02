@@ -1,0 +1,6 @@
+---
+- name: Install enssential packages
+  package:
+    name: '{{ essential_packages }}'
+    state: present
+    update_cache: yes

@@ -1,0 +1,31 @@
+# SYSTEM
+
+hostname: '{{ inventory_hostname }}'
+
+timezone: America/New_York
+
+username: giahuy
+
+dotfiles_repo: https://github.com/giahuy2201/dotfiles
+
+# NETWORKING
+
+# PACKAGES
+
+essential_packages:
+  - vim
+  - git
+  - neofetch
+  - btop
+  - iftop
+  - powertop
+  - net-tools›
+  - smartmontools
+  - unzip
+  - samba
+  - nfs-common
+  - iperf3
+  - stow
+  - rsync
+
+# DOCKER
