@@ -1,10 +1,5 @@
 ---
-- name: Install enssential packages
-  package:
-    name: '{{ essential_packages }}'
-    state: present
-    update_cache: yes
-
+- include_tasks: essentials.yml
 - include_tasks: network.yml
 - include_tasks: dotfiles.yml
 - include_tasks: user.yml
