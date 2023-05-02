@@ -1,0 +1,10 @@
+---
+- name: Clone dotfiles repo
+  git:
+    repo: '{{ dotfiles_repo }}'
+    dest: '/home/{{ username }}/dotfiles'
+
+- name: Stow dotfiles
+  command: 
+    cmd: 'stow --target $HOME *'
+    chdir: '/home/{{ username }}/dotfiles'

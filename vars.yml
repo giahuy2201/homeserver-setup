@@ -19,7 +19,7 @@ essential_packages:
   - btop
   - iftop
   - powertop
-  - net-tools›
+  - net-tools
   - smartmontools
   - unzip
   - samba
