@@ -1,5 +1,5 @@
 ---
-- name: Install Cockpit Machines with qemu-kvm
+- name: Install Cockpit Virtual Machines with qemu-kvm
   package:
     name:
       - cockpit-machines

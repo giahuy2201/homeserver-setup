@@ -6,10 +6,3 @@
     default_release: "{{ ansible_distribution_release }}-backports"
     state: present
     update_cache: yes
-
-- name: Install Cockpit Apps
-  package:
-    name:
-      - cockpit-pcp
-    state: present
-    update_cache: yes

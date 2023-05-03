@@ -1,0 +1,7 @@
+---
+- name: Install Cockpit Performance Co-Pilot
+  package:
+    name:
+      - cockpit-pcp
+    state: present
+    update_cache: yes
