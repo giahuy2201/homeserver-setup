@@ -1,15 +1,11 @@
 ---
 - name: Copy docker-compose file and containers data
+  become: false
   synchronize:
     src: '~/Sync/{{ hostname }}/{{ username }}/containers/'
     dest: '/home/{{ username }}/containers/'
-
-- name: Set containers data permissions
-  file:
-    path: '/home/{{ username }}/containers'
-    owner: '{{ username }}'
-    group: '{{ username }}'
-    state: directory
+    owner: false
+    group: false
 
 - name: Install docker pip module
   pip:
