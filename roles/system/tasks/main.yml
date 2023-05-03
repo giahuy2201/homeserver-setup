@@ -1,6 +1,6 @@
 ---
 - include_tasks: essential.yml
-- include_tasks: network.yml
 - include_tasks: dotfiles.yml
+  when: with_dotfiles
 - include_tasks: user.yml
-- include_tasks: storage.yml
+- include_tasks: ssh.yml

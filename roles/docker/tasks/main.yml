@@ -2,5 +2,5 @@
 - include_tasks: install.yml
 - include_tasks: migrate.yml
   when: migrate_containers == 'yes'
-- include_tasks: migrate.yml
+- include_tasks: launch.yml
   when: compose_up == 'yes'

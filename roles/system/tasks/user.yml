@@ -1,64 +1,46 @@
 ---
-- name: Add samba group
+- name: 'Add {{ samba_group }} group'
   group:
-    name: "{{ samba_group }}"
-    state: present
+    name: '{{ samba_group }}'
     gid: 1002
+  when: with_samba
 
-- name: Setup login user & groups
+- name: 'Ensure all necessary groups exist'
+  group:
+    name: '{{ item.group }}'
+  loop:
+    - group: '{{ username }}'
+    - group: docker
+      when: with_docker
+    - group: libvirt
+      when: with_cockpit_machines
+
+- name: Setup login user with group sudo and {{ username }}
   user:
     name: "{{ username }}"
     groups: 
       - sudo
-      - '{{ samba_group }}'
-    state: present
+      - '{{ username }}'
     append: true
 
-- name: Allow sudo group to have passwordless sudo
-  copy:
-    src: nopasswd
-    dest: /etc/sudoers.d/nopasswd
+- name: Ensure login user ({{ username }}) is in necessary groups
+  user:
+    name: "{{ username }}"
+    groups: 
+      - '{{ item.group }}'
+    append: true
+  loop:
+    - group: '{{ samba_group }}'
+      when: with_samba
+    - group: docker
+      when: with_docker
+    - group: libvirt
+      when: with_cockpit_machines
+
+- name: Allow {{ username }} user to have passwordless sudo
+  template:
+    src: passwordless-sudo.j2
+    dest: /etc/sudoers.d/passwordless-sudo
     owner: root
     group: root
     mode: 0644
-
-- name: Copy public SSH key 
-  authorized_key:
-    user: "{{ username }}"
-    key: "{{ lookup('file', '~/.ssh/{{ hostname }}.pub') }}"
-    state: present
-
-- name: Disable Root Login
-  lineinfile:
-    dest: /etc/ssh/sshd_config
-    regexp: '^PermitRootLogin'
-    line: "PermitRootLogin no"
-    state: present
-    backup: yes
-  notify:
-    - restart sshd
-
-- name: Enable SSH public key auth
-  lineinfile:
-    dest: /etc/ssh/sshd_config
-    regexp: '^PubkeyAuthentication'
-    line: "PubkeyAuthentication yes"
-    state: present
-    backup: yes
-  notify:
-    - restart sshd
-
-- name: Remove cloud-init SSH config
-  file:
-    path: /etc/ssh/sshd_config.d/50-cloud-init.conf
-    state: absent
-
-- name: Disable SSH password auth
-  lineinfile:
-    dest: /etc/ssh/sshd_config
-    regexp: '^PasswordAuthentication'
-    line: "PasswordAuthentication no"
-    state: present
-    backup: yes
-  notify:
-    - restart sshd

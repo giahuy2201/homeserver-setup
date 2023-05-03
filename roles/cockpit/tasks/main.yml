@@ -1,9 +1,9 @@
 
 ---
-- include_tasks: setup.yml
+- include_tasks: install.yml
 - include_tasks: cockpit-pcp.yml
-  when: with_cockpit-pcp
+  when: with_cockpit_pcp
 - include_tasks: cockpit-machines.yml
-  when: with_cockpit-machines
+  when: with_cockpit_machines
 - include_tasks: cockpit-networkmanager.yml
-  when: with_cockpit-networkmanager
+  when: with_cockpit_networkmanager

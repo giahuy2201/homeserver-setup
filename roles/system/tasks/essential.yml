@@ -31,3 +31,4 @@
     value: '10'
     state: present
     reload: true
+  when: swappiness is defined

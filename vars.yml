@@ -1,12 +1,14 @@
 # MISC
 
-allow_restart: 'no'
-
 dotfiles_repo: https://github.com/giahuy2201/dotfiles
 
 # SYSTEM
 
+allow_restart: 'no'
+
 timezone: America/New_York
+
+dotfiles_dir: '/home/{{ username }}/dotfiles'
 
 # STORAGE
 
@@ -75,6 +77,12 @@ essential_packages:
   - smartmontools
   - unzip
   - iperf3
-  - stow
-  - rsync
-  - python3-pip
+
+# DOCKER
+
+compose_file: 'docker-compose.yaml'
+containers_backup_dir: '~/Sync/{{ hostname }}/{{ username }}/containers'
+containers_dir: '/home/{{ username }}/containers'
+
+migrate_containers: 'yes'
+compose_up: 'yes'

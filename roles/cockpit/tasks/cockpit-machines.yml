@@ -8,19 +8,6 @@
     state: present
     update_cache: yes
 
-- name: Add libvirt group
-  group:
-    name: libvirt
-    state: present
-
-- name: Add user to group libvirt
-  user:
-    name: "{{ username }}"
-    groups: 
-      - libvirt
-    state: present
-    append: true
-
 - name: Change libvirtd user to username
   lineinfile:
     dest: /etc/libvirt/qemu.conf

@@ -6,10 +6,17 @@
     - vars.yml
 
   roles:
-    - system
-    - cockpit
-    - docker
-    - vladgh.samba.server
+    - role: system
+    - role: netplan
+      when: with_netplan
+    - role: cockpit
+      when: with_cockpit
+    - role: docker
+      when: with_docker
+    - role: storage
+      when: with_storage
+    - role: vladgh.samba.server
+      when: with_samba
 
   pre_tasks:
     - import_tasks: tasks/platform.yml
