@@ -1,0 +1,28 @@
+---
+- name: Ensure nmcli is installed
+  package:
+    name: network-manager
+    state: present
+
+- name: Ensure NetworkManager is running
+  service:
+    name: NetworkManager
+    state: started
+
+- name: Create NetworkManager dummy config file
+  copy:
+    src: 10-globally-managed-devices.conf
+    dest: /etc/NetworkManager/conf.d/10-globally-managed-devices.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart NetworkManager
+
+- name: Set up a “dummy” network interface
+  community.general.nmcli:
+    type: dummy
+    conn_name: fake
+    ifname: fake0
+    ip4: '1.2.3.4/24'
+    gw4: '1.2.3.1'
+    state: present

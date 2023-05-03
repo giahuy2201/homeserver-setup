@@ -4,5 +4,10 @@
     name: libvirtd
     state: restarted
 
+- name: restart NetworkManager
+  service:
+    name: NetworkManager
+    state: restarted
+
 - name: update grub
   command: update-grub
