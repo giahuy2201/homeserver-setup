@@ -3,7 +3,6 @@
   git:
     repo: '{{ dotfiles_repo }}'
     dest: '/home/{{ username }}/dotfiles'
-    force: yes
 
 - name: Change dotfiles folder permissions
   file:
@@ -12,12 +11,9 @@
     owner: '{{ username }}'
     group: '{{ username }}'
 
-- name: Remove README file
-  file:
-    path: '/home/{{ username }}/dotfiles/README.md'
-    state: absent
-
 - name: Stow dotfiles
   shell: 
-    cmd: 'stow --target $HOME *'
+    cmd: 'stow -v -t /home/{{ username }} */'
     chdir: '/home/{{ username }}/dotfiles'
+  register: stow_result
+  changed_when: '"LINK" in stow_result.stderr'
