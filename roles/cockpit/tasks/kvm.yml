@@ -1,4 +1,13 @@
 ---
+- name: Install Cockpit Machines with qemu-kvm
+  package:
+    name:
+      - cockpit-machines
+      - qemu-kvm
+      - qemu-guest-agent
+    state: present
+    update_cache: yes
+
 - name: Add libvirt group
   group:
     name: libvirt
@@ -16,7 +25,7 @@
   lineinfile:
     dest: /etc/libvirt/qemu.conf
     regexp: '^user'
-    line: 'user = {{ username }}'
+    line: 'user = "{{ username }}"'
     state: present
     backup: yes
   notify: restart libvirtd
@@ -25,7 +34,7 @@
   lineinfile:
     dest: /etc/libvirt/qemu.conf
     regexp: '^group'
-    line: 'group = libvirt'
+    line: 'group = "libvirt"'
     state: present
     backup: yes
   notify: restart libvirtd
