@@ -21,9 +21,13 @@
     state: present
     update_cache: yes
 
-- name: Set hostname
+- name: Set hostname to {{ hostname }}
   hostname:
     name: '{{ hostname }}'
+
+- name: Set timezone to {{ timezone }}
+  timezone:
+    name: '{{ timezone }}'
 
 - name: Set RAM swappiness to 10
   sysctl:

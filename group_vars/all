@@ -1,0 +1,49 @@
+# ANSIBLE
+
+hostname: server
+username: username
+password: password
+
+with_cockpit: false
+with_cockpit_pcp: false
+with_cockpit_networkmanager: false
+with_cockpit_machines: false
+with_dotfiles: false
+with_netplan: false
+with_docker: false
+with_storage: false
+with_samba: false
+allow_restart: 'no'
+
+dotfiles_repo: https://github.com/giahuy2201/dotfiles
+
+# SYSTEM
+
+swappiness: 60
+
+timezone: America/New_York
+
+dotfiles_dir: '/home/{{ username }}/dotfiles'
+
+# PACKAGES
+
+essential_packages:
+  - vim
+  - git
+  - neofetch
+  - btop
+  - iftop
+  - powertop
+  - net-tools
+  - smartmontools
+  - unzip
+  - iperf3
+
+# DOCKER
+
+compose_file: 'docker-compose.yaml'
+containers_backup_dir: '~/Sync/{{ hostname }}/{{ username }}/containers'
+containers_dir: '/home/{{ username }}/containers'
+
+migrate_containers: 'yes'
+compose_up: 'yes'

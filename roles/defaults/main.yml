@@ -1,0 +1,3 @@
+with_cockpit_pcp: false
+with_cockpit_machines: false
+with_cockpit_networkmanager: false
