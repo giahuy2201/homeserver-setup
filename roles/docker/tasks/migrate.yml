@@ -5,6 +5,18 @@
       - rsync
     state: present
 
+- name: Check if containers data backup folder exists
+  become: false
+  stat:
+    path: '{{ containers_backup_dir }}'
+  register: containers_backup
+  delegate_to: localhost
+
+- name: Warn user that containers data backup doesn't exist or wrong path was provided
+  debug:
+    msg: "[WARNING]: Containers data backup not found at {{ containers_backup_dir }}"
+  when: not containers_backup.stat.exists and containers_backup.stat.isdir
+
 - name: Check if docker-compose file exists to not overwrite containers data
   stat:
     path: '{{ containers_dir }}/{{ compose_file }}'
@@ -13,13 +25,13 @@
 - name: Copy docker-compose file and containers data
   become: false
   synchronize:
-    src: '{{ containers_backup_dir}}/'
+    src: '{{ containers_backup_dir }}/'
     dest: '{{ containers_dir }}/'
     owner: false
     group: false
-  when: not docker_compose_file.stat.exists
+  when: not docker_compose_file.stat.exists and containers_backup.stat.exists and containers_backup.stat.isdir
 
 - name: Warn user that docker-compse file exists and migration was skipped
   debug:
-    msg: "[WARNING]: Containers data folder seems to be in place, migration was aborted\nRemove {{ containers_dir }} and run again to proceed!!!"
-  when: docker_compose_file.stat.exists
+    msg: "[WARNING]: Containers data folder seems to be in place, migration was aborted. Remove {{ containers_dir }} and run again to proceed!!!"
+  when: docker_compose_file.stat.exists and containers_backup.stat.exists and containers_backup.stat.isdir
