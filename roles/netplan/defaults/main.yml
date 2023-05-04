@@ -1,0 +1,11 @@
+network:
+  renderer: networkd
+  ethernets:
+    - name: eth0
+      dhcp4: true
+      macaddress: '00:00:00:00:00:00'
+    - name: thunderbolt0
+      optional: true
+      macaddress: '10:10:10:10:10:10'
+      addresses:
+        - 10.10.10.1/24

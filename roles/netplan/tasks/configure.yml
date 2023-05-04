@@ -1,7 +1,21 @@
 ---
+- name: Remove all but Ansible Netplan config
+  block:
+    - name: Collect config files
+      ansible.builtin.find:
+        paths: "/etc/netplan"
+        file_type: any
+        excludes: '00-ansible.yaml'
+      register: collected_files
+    - name: Remove them
+      file:
+        path: "{{ item.path }}"
+        state: absent
+      with_items: "{{ collected_files.files }}"
+
 - name: Config netplan
   template:
-    src: netplan.yml
+    src: netplan.yml.j2
     dest: /etc/netplan/00-ansible.yaml
     owner: root
     group: root

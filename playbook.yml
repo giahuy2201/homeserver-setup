@@ -2,9 +2,6 @@
 - hosts: tester
   become: yes
 
-  vars_files:
-    - vars.yml
-
   roles:
     - role: system
     - role: netplan

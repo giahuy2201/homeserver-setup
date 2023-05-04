@@ -1,0 +1,24 @@
+network:
+  version: 2
+  renderer: {{ network.renderer }}
+  ethernets:
+{% for ethernet in network.ethernets %}
+    {{ ethernet.name}}:
+      set-name: {{ ethernet.name}}
+{% if ethernet.optional is defined %}
+      optional: {{ ethernet.optional }}
+{% endif %}
+{% if ethernet.dhcp4 is defined %}
+      dhcp4: {{ ethernet.dhcp4 }}
+{% endif %}
+{% if ethernet.macaddress is defined %}
+      match:
+        macaddress: {{ ethernet.macaddress}}
+{% endif %}
+{% if ethernet.addresses is defined %}
+      addresses:
+{% for address in ethernet.addresses %}
+        - {{ address }}
+{% endfor %}
+{% endif %}
+{% endfor %}
