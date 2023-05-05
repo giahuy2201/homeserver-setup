@@ -8,6 +8,7 @@ with_dotfiles: true
 with_netplan: true
 with_docker: true
 with_samba: true
+with_nfs: true
 swappiness: 0
 
 # Netplan
@@ -61,3 +62,8 @@ samba_shares:
     group: '{{ username }}'
     valid_users: '{{ username }}'
     write_list: '{{ username }}'
+
+# NFS server
+nfs_exports: ["/home/{{ username }}    *(rw,sync,no_root_squash)"]
+nfs_rpcbind_state: started
+nfs_rpcbind_enabled: true

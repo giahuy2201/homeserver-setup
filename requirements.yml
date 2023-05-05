@@ -1,3 +1,5 @@
 ---
+roles:
+  - name: geerlingguy.nfs
 collections:
   - name: vladgh.samba

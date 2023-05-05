@@ -14,6 +14,8 @@
       when: with_storage
     - role: vladgh.samba.server
       when: with_samba
+    - role: geerlingguy.nfs
+      when: with_nfs
 
   pre_tasks:
     - import_tasks: tasks/platform.yml

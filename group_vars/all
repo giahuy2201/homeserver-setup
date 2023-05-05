@@ -13,6 +13,7 @@ with_netplan: false
 with_docker: false
 with_storage: false
 with_samba: false
+with_nfs: false
 allow_restart: 'no'
 
 dotfiles_repo: https://github.com/giahuy2201/dotfiles
