@@ -64,6 +64,6 @@ samba_shares:
     write_list: '{{ username }}'
 
 # NFS server
-nfs_exports: ["/home/{{ username }}    *(rw,sync,no_root_squash)"]
+nfs_exports: ['/home/{{ username }}    {{ ansible_host }}(rw,sync,no_root_squash)']
 nfs_rpcbind_state: started
 nfs_rpcbind_enabled: true
