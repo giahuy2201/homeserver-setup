@@ -1,5 +1,7 @@
 # ANSIBLE
 
+raspberrypi: 'no'
+
 hostname: server
 username: username
 password: password

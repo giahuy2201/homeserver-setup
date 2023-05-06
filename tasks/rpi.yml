@@ -1,0 +1,14 @@
+---
+- name: Check hardware model file
+  block:
+    - stat:
+        path: /sys/firmware/devicetree/base/model
+      register: hwmodel_file
+    - command: cat /sys/firmware/devicetree/base/model
+      register: system_hwmodel
+      when: hwmodel_file.stat.exists
+
+- name: Check whether host is a Raspberry Pi
+  set_fact:
+    raspberrypi: 'yes'
+  when: system_hwmodel is defined and 'Raspberry Pi' in system_hwmodel

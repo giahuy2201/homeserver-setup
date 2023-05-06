@@ -1,5 +1,7 @@
 ---
 - include_tasks: essential.yml
+- include_tasks: rpi.yml
+  when: raspberrypi == 'yes'
 - include_tasks: dotfiles.yml
   when: with_dotfiles
 - include_tasks: user.yml
