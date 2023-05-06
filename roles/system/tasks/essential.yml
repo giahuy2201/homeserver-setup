@@ -36,3 +36,10 @@
     state: present
     reload: true
   when: swappiness is defined
+
+- name: Enable IP forwarding (ipv4)
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: '1'
+    sysctl_set: true
+  when: ip_forward is defined and ip_forward == 'yes'

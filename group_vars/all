@@ -23,6 +23,7 @@ dotfiles_repo: https://github.com/giahuy2201/dotfiles
 # SYSTEM
 
 swappiness: 60
+ip_forward: 'no'
 
 timezone: America/New_York
 
