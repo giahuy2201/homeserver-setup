@@ -19,3 +19,4 @@
 
   pre_tasks:
     - import_tasks: tasks/platform.yml
+    - import_tasks: tasks/rpi.yml
