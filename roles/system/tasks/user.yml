@@ -1,4 +1,16 @@
 ---
+- name: Set {{ username }} shell to {{ shell }}
+  user:
+    name: '{{ username }}'
+    shell: '{{ shell }}'
+    
+- name: Give user {{ username }} home folder permissions
+  file:
+    path: '/home/{{ username }}'
+    state: directory
+    owner: '{{ username }}'
+    group: '{{ username }}'
+
 - name: 'Ensure {{ username }} group exist'
   group:
     name: '{{ username }}'
