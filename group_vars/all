@@ -5,6 +5,7 @@ raspberrypi: 'no'
 hostname: server
 username: username
 password: password
+shell: /bin/bash
 
 with_cockpit: false
 with_cockpit_pcp: false
