@@ -9,7 +9,7 @@
   ansible.posix.mount:
     path: '/mnt/{{ item.name }}'
     src: 'UUID={{ item.uuid }}'
-    fstype: ext4
+    fstype: '{{ item.ftype }}'
     state: mounted
   loop: '{{ drives }}'
 
