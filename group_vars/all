@@ -1,6 +1,7 @@
 # ANSIBLE
 
 raspberrypi: 'no'
+qemu_vm: 'no'
 
 hostname: server
 username: username

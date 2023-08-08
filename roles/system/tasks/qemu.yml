@@ -1,0 +1,20 @@
+---
+- name: Install QEMU Guest Agent 
+  package:
+    name:
+      - qemu-guest-agent
+    state: latest
+    update_cache: yes
+  when: qemu_vm == 'yes'
+
+- name: Enable qemu-guest-agent service
+  service:
+    name: qemu-guest-agent
+    enabled: yes
+  when: qemu_vm == 'yes'
+
+- name: Start qemu-guest-agent
+  service:
+    name: qemu-guest-agent
+    state: started
+  when: qemu_vm == 'yes'
