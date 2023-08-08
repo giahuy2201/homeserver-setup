@@ -13,6 +13,7 @@ with_cockpit_networkmanager: false
 with_cockpit_machines: false
 with_dotfiles: false
 with_netplan: false
+with_coral: false
 with_docker: false
 with_storage: false
 with_samba: false
@@ -33,7 +34,7 @@ dotfiles_dir: '/home/{{ username }}/dotfiles'
 # PACKAGES
 
 essential_packages:
-  - vim
+  - neovim
   - git
   - neofetch
   - btop

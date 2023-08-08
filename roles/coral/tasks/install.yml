@@ -1,0 +1,29 @@
+---
+- name: Ensure keyrings folder exists
+  file:
+    path: /etc/apt/keyrings
+    mode: '0755'
+    state: directory
+
+- name: Get gpg key
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    keyring: /etc/apt/keyrings/google-cloud.gpg
+
+- name: Set key permission
+  file: 
+    dest: /etc/apt/keyrings/google-cloud.gpg
+    mode: a+r
+
+- name: Create coral-edgetpu.list
+  template:
+    src: templates/coral-edgetpu.list.j2
+    dest: /etc/apt/sources.list.d/coral-edgetpu.list
+
+- name: Install Coral TPU driver
+  package:
+    name:
+      - libedgetpu1-std
+      - gasket-dkms
+    state: present
+    update_cache: yes
