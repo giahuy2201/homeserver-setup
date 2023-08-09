@@ -1,0 +1,17 @@
+---
+- name: Add serial to grub terminal
+  lineinfile:
+    dest: /etc/default/grub
+    regexp: '^GRUB_TERMINAL'
+    line: 'GRUB_TERMINAL="console serial"'
+    state: present
+    backup: yes
+
+- name: Add serial kernel parameters
+  lineinfile:
+    dest: /etc/default/grub
+    regexp: '^(GRUB_CMDLINE_LINUX=(?!.*console=tty0 console=ttyS0,115200)\"[^\"]*)(\".*)'
+    line: '\1 console=tty0 console=ttyS0,115200\2'
+    backrefs: yes
+    state: present
+  notify: update grub

@@ -4,6 +4,8 @@
   when: raspberrypi == 'yes'
 - include_tasks: user.yml
 - include_tasks: ssh.yml
+- include_tasks: serial.yml
+  when: with_serial
 - include_tasks: qemu.yml
 - include_tasks: dotfiles.yml
   when: with_dotfiles

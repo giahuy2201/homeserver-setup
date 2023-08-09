@@ -3,3 +3,7 @@
   service:
     name: sshd
     state: restarted
+
+- name: update grub
+  become: true
+  command: update-grub
