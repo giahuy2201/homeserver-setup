@@ -18,3 +18,50 @@
     name: qemu-guest-agent
     state: started
   when: qemu_vm == 'yes'
+
+- name: Add iommu kernel parameters
+  lineinfile:
+    dest: /etc/default/grub
+    regexp: '^(GRUB_CMDLINE_LINUX=(?!.*intel_iommu=on iommu=pt)\"[^\"]+)(\".*)'
+    line: '\1 intel_iommu=on iommu=pt\2'
+    backrefs: yes
+    state: present
+  when: hypervisor == 'yes'
+  notify: update grub
+
+- name: Add PCIE ACS override kernel parameters
+  lineinfile:
+    dest: /etc/default/grub
+    regexp: '^(GRUB_CMDLINE_LINUX=(?!.*pcie_acs_override=downstream,multifunction)\"[^\"]+)(\".*)'
+    line: '\1 pcie_acs_override=downstream,multifunction\2'
+    backrefs: yes
+    state: present
+  when: hypervisor == 'yes' and acs_patch == 'yes'
+
+- name: Add allow_unsafe_interrupts kernel parameters
+  lineinfile:
+    dest: /etc/default/grub
+    regexp: '^(GRUB_CMDLINE_LINUX=(?!.*vfio_iommu_type1.allow_unsafe_interrupts=1)\"[^\"]+)(\".*)'
+    line: '\1 vfio_iommu_type1.allow_unsafe_interrupts=1\2'
+    backrefs: yes
+    state: present
+  when: hypervisor == 'yes' and acs_patch == 'yes'
+
+- name: Add blacklisted modules kernel parameters
+  lineinfile:
+    dest: /etc/default/grub
+    regexp: '^(GRUB_CMDLINE_LINUX=(?!.*modprobe.blacklist=amdgpu,i915)\"[^\"]+)(\".*)'
+    line: '\1 modprobe.blacklist=amdgpu,i915\2'
+    backrefs: yes
+    state: present
+  when: hypervisor == 'yes' and gpu_passthrough == 'yes'
+
+- name: Force GPU vfio-pci with kernel parameters
+  lineinfile:
+    dest: /etc/default/grub
+    regexp: '^(GRUB_CMDLINE_LINUX=(?!.*vfio-pci.ids={{ gpu_ids }})\"[^\"]+)(\".*)'
+    line: '\1 vfio-pci.ids={{ gpu_ids }}\2'
+    backrefs: yes
+    state: present
+  when: hypervisor == 'yes' and gpu_passthrough == 'yes' and gpu_ids is defined
+  notify: update grub

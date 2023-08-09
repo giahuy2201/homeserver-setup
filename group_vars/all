@@ -34,6 +34,12 @@ timezone: America/New_York
 
 dotfiles_dir: '/home/{{ username }}/dotfiles'
 
+# Hypervisor
+
+hypervisor: 'no'
+acs_patch: 'no'
+gpu_passthrough: 'no'
+
 # PACKAGES
 
 essential_packages:
