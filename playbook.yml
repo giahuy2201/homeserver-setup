@@ -10,6 +10,8 @@
       when: with_cockpit
     - role: docker
       when: with_docker
+    - role: wireguard
+      when: with_wireguard
     - role: coral
       when: with_coral
     - role: storage

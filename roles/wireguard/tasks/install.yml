@@ -1,0 +1,13 @@
+---
+- name: Install Wireguard and dependencies
+  package:
+    name: 
+      - wireguard
+      - resolvconf
+    state: present
+    update_cache: yes
+
+- name: Enable wireguard service
+  service:
+    name: wg-quick@wg0
+    enabled: yes

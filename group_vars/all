@@ -8,6 +8,7 @@ username: username
 password: password
 shell: /bin/bash
 
+with_wireguard: false
 with_cockpit: false
 with_cockpit_pcp: false
 with_cockpit_networkmanager: false

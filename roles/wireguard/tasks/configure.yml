@@ -1,0 +1,9 @@
+---
+- name: Copy client/server config file
+  copy:
+    src: wg0.conf
+    dest: /etc/wireguard/wg0.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart wireguard
