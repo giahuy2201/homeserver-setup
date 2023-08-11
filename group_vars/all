@@ -60,5 +60,5 @@ compose_file: 'docker-compose.yaml'
 containers_backup_dir: '~/Sync/{{ hostname }}/{{ username }}/containers'
 containers_dir: '/home/{{ username }}/containers'
 
-migrate_containers: 'yes'
-compose_up: 'yes'
+migrate_containers: 'no'
+compose_up: 'no'
