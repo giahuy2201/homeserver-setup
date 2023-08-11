@@ -29,10 +29,10 @@
   timezone:
     name: '{{ timezone }}'
 
-- name: Set RAM swappiness to 10
+- name: Set RAM swappiness
   sysctl:
     name: vm.swappiness
-    value: '10'
+    value: '{{ swappiness }}'
     state: present
     reload: true
   when: swappiness is defined
