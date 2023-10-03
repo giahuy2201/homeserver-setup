@@ -19,7 +19,13 @@
 
 - name: Stow dotfiles
   shell: 
-    cmd: 'stow -v -t /home/{{ username }} */'
+    cmd: 'stow -v -t /home/{{ username }} --adopt */'
     chdir: '{{ dotfiles_dir }}'
   register: stow_result
   changed_when: '"LINK" in stow_result.stderr'
+
+- name: Force update dotfiles repo again
+  git:
+    repo: '{{ dotfiles_repo }}'
+    dest: '{{ dotfiles_dir }}'
+    force: true

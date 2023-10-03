@@ -18,7 +18,7 @@
 - name: 'Add {{ samba_group }} group'
   group:
     name: '{{ samba_group }}'
-    gid: 1002
+    gid: 1001
   when: with_samba
 
 - name: 'Add docker group'
