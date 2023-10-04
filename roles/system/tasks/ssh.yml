@@ -21,6 +21,7 @@
       with_items: "{{ collected_files.files }}"
 
 - name: Disable Root Login
+  become: true
   lineinfile:
     dest: /etc/ssh/sshd_config
     regexp: '^PermitRootLogin'
@@ -29,6 +30,7 @@
     backup: yes
 
 - name: Disable SSH password auth
+  become: true
   lineinfile:
     dest: /etc/ssh/sshd_config
     regexp: '^PasswordAuthentication'
@@ -37,6 +39,7 @@
     backup: yes
 
 - name: Disable SSH Challenge Response Authentication
+  become: true
   lineinfile:
     dest: /etc/ssh/sshd_config
     regexp: '^ChallengeResponseAuthentication'
@@ -45,6 +48,7 @@
     backup: yes
 
 - name: Disable SSH GSSAPIAuthentication
+  become: true
   lineinfile:
     dest: /etc/ssh/sshd_config
     regexp: '^GSSAPIAuthentication'
@@ -53,6 +57,7 @@
     backup: yes
 
 - name: Disable SSH X11Forwarding
+  become: true
   lineinfile:
     dest: /etc/ssh/sshd_config
     regexp: '^X11Forwarding'
@@ -61,6 +66,7 @@
     backup: yes
 
 - name: Enable SSH public key auth
+  become: true
   lineinfile:
     dest: /etc/ssh/sshd_config
     regexp: '^PubkeyAuthentication'

@@ -1,5 +1,6 @@
 ---
 - name: Install Netplan
+  become: true
   package:
     name:
       - netplan.io

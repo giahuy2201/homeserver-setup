@@ -1,5 +1,6 @@
 ---
 - name: Install Wireguard and dependencies
+  become: true
   package:
     name: 
       - wireguard
@@ -8,6 +9,7 @@
     update_cache: yes
 
 - name: Enable wireguard service
+  become: true
   service:
     name: wg-quick@wg0
     enabled: yes

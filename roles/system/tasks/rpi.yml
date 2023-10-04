@@ -1,21 +1,25 @@
 ---
 - name: Install Raspberry EEPROM package
+  become: true
   package:
     name:
       - rpi-eeprom
     state: latest
 
 - name: Update EEPROM
+  become: true
   command: rpi-eeprom-update -a
   register: eeprom_update
   changed_when: eeprom_update.rc == 1
   failed_when: eeprom_update.rc != 1 and eeprom_update.rc != 0
 
 - name: Reboot to update EEPROM
+  become: true
   reboot:
   when: eeprom_update.rc == 1 and allow_restart == 'yes'
 
 - name: Enable Ethernet over USB type C
+  become: true
   block:
     - name: Add dwc2 overlay to config.txt
       lineinfile:

@@ -1,5 +1,6 @@
 ---
 - name: Install QEMU Guest Agent 
+  become: true
   package:
     name:
       - qemu-guest-agent
@@ -8,18 +9,21 @@
   when: qemu_vm == 'yes'
 
 - name: Enable qemu-guest-agent service
+  become: true
   service:
     name: qemu-guest-agent
     enabled: yes
   when: qemu_vm == 'yes'
 
 - name: Start qemu-guest-agent
+  become: true
   service:
     name: qemu-guest-agent
     state: started
   when: qemu_vm == 'yes'
 
 - name: Add iommu kernel parameters
+  become: true
   lineinfile:
     dest: /etc/default/grub
     regexp: '^(GRUB_CMDLINE_LINUX=(?!.*intel_iommu=on iommu=pt)\"[^\"]+)(\".*)'
@@ -30,6 +34,7 @@
   notify: update grub
 
 - name: Add PCIE ACS override kernel parameters
+  become: true
   lineinfile:
     dest: /etc/default/grub
     regexp: '^(GRUB_CMDLINE_LINUX=(?!.*pcie_acs_override=downstream,multifunction)\"[^\"]+)(\".*)'
@@ -39,6 +44,7 @@
   when: hypervisor == 'yes' and acs_patch == 'yes'
 
 - name: Add allow_unsafe_interrupts kernel parameters
+  become: true
   lineinfile:
     dest: /etc/default/grub
     regexp: '^(GRUB_CMDLINE_LINUX=(?!.*vfio_iommu_type1.allow_unsafe_interrupts=1)\"[^\"]+)(\".*)'
@@ -48,6 +54,7 @@
   when: hypervisor == 'yes' and acs_patch == 'yes'
 
 - name: Add blacklisted modules kernel parameters
+  become: true
   lineinfile:
     dest: /etc/default/grub
     regexp: '^(GRUB_CMDLINE_LINUX=(?!.*modprobe.blacklist=amdgpu,i915)\"[^\"]+)(\".*)'
@@ -57,6 +64,7 @@
   when: hypervisor == 'yes' and gpu_passthrough == 'yes'
 
 - name: Force GPU vfio-pci with kernel parameters
+  become: true
   lineinfile:
     dest: /etc/default/grub
     regexp: '^(GRUB_CMDLINE_LINUX=(?!.*vfio-pci.ids={{ gpu_ids }})\"[^\"]+)(\".*)'

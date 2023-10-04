@@ -1,5 +1,6 @@
 ---
 - name: Add serial to grub terminal
+  become: true
   lineinfile:
     dest: /etc/default/grub
     regexp: '^GRUB_TERMINAL'
@@ -8,6 +9,7 @@
     backup: yes
 
 - name: Add serial kernel parameters
+  become: true
   lineinfile:
     dest: /etc/default/grub
     regexp: '^(GRUB_CMDLINE_LINUX=(?!.*console=tty0 console=ttyS0,115200)\"[^\"]*)(\".*)'

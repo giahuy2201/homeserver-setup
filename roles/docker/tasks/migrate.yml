@@ -1,12 +1,12 @@
 ---
 - name: Ensure rsync is installed
+  become: true
   package:
     name:
       - rsync
     state: present
 
 - name: Check if containers data backup folder exists
-  become: false
   stat:
     path: '{{ containers_backup_dir }}'
   register: containers_backup

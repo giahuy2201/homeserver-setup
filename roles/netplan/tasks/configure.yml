@@ -1,5 +1,6 @@
 ---
 - name: Remove all but Ansible Netplan config
+  become: true
   block:
     - name: Collect config files
       ansible.builtin.find:
@@ -14,6 +15,7 @@
       with_items: "{{ collected_files.files }}"
 
 - name: Config netplan
+  become: true
   template:
     src: netplan.yml.j2
     dest: /etc/netplan/00-ansible.yaml

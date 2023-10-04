@@ -1,5 +1,6 @@
 ---
 - name: Ensure python3-pip is installed
+  become: true
   package:
     name:
       - python3
@@ -7,11 +8,13 @@
     state: present
 
 - name: Install docker pip module
+  become: true
   pip:
     name: 
       - docker
       - docker-compose
 
 - name: Pull docker images and launch containers
+  become: true
   community.docker.docker_compose:
     project_src: '{{ containers_dir }}'

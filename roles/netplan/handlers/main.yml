@@ -1,3 +1,4 @@
 ---
 - name: apply netplan
+  become: true
   command: netplan apply

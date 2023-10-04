@@ -1,5 +1,6 @@
 ---
 - name: Copy client/server config file
+  become: true
   copy:
     src: wg0.conf
     dest: /etc/wireguard/wg0.conf

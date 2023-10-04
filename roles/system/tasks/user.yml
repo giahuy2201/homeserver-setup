@@ -1,10 +1,12 @@
 ---
 - name: Set {{ username }} shell to {{ shell }}
+  become: true
   user:
     name: '{{ username }}'
     shell: '{{ shell }}'
     
 - name: Give user {{ username }} home folder permissions
+  become: true
   file:
     path: '/home/{{ username }}'
     state: directory
@@ -12,26 +14,31 @@
     group: '{{ username }}'
 
 - name: 'Ensure {{ username }} group exist'
+  become: true
   group:
     name: '{{ username }}'
     
 - name: 'Add {{ samba_group }} group'
+  become: true
   group:
     name: '{{ samba_group }}'
     gid: 1001
   when: with_samba
 
 - name: 'Add docker group'
+  become: true
   group:
     name: docker
   when: with_docker
 
 - name: 'Add libvirt group'
+  become: true
   group:
     name: libvirt
   when: with_cockpit_machines
 
 - name: Setup login user with group sudo and {{ username }}
+  become: true
   user:
     name: "{{ username }}"
     groups: 
@@ -40,6 +47,7 @@
     append: true
 
 - name: Ensure login user ({{ username }}) is in {{ samba_group }} group
+  become: true
   user:
     name: "{{ username }}"
     groups: 
@@ -48,6 +56,7 @@
   when: with_samba
 
 - name: Ensure login user ({{ username }}) is in docker group
+  become: true
   user:
     name: "{{ username }}"
     groups: 
@@ -56,6 +65,7 @@
   when: with_docker
 
 - name: Ensure login user ({{ username }}) is in libvirt group
+  become: true
   user:
     name: "{{ username }}"
     groups: 
@@ -64,6 +74,7 @@
   when: with_cockpit_machines
 
 - name: Allow {{ username }} user to have passwordless sudo
+  become: true
   template:
     src: passwordless-sudo.j2
     dest: /etc/sudoers.d/passwordless-sudo

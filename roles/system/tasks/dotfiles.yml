@@ -1,23 +1,22 @@
 ---
 - name: Ensure stow is installed
+  become: true
   package:
     name:
       - stow
     state: present
 
 - name: Clone dotfiles repo
+  become: true
+  become_user: '{{ username }}'
   git:
     repo: '{{ dotfiles_repo }}'
     dest: '{{ dotfiles_dir }}'
-
-- name: Change dotfiles folder permissions
-  file:
-    path: '{{ dotfiles_dir}}'
-    state: directory
-    owner: '{{ username }}'
-    group: '{{ username }}'
+    force: true
 
 - name: Stow dotfiles
+  become: true
+  become_user: '{{ username }}'
   shell: 
     cmd: 'stow -v -t /home/{{ username }} --adopt */'
     chdir: '{{ dotfiles_dir }}'
@@ -25,6 +24,8 @@
   changed_when: '"LINK" in stow_result.stderr'
 
 - name: Force update dotfiles repo again
+  become: true
+  become_user: '{{ username }}'
   git:
     repo: '{{ dotfiles_repo }}'
     dest: '{{ dotfiles_dir }}'

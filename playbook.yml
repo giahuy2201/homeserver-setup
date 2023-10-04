@@ -1,9 +1,10 @@
 ---
 - hosts: tester
-  become: yes
 
   roles:
     - role: system
+    - role: proxmox
+      when: with_proxmox
     - role: netplan
       when: with_netplan
     - role: cockpit
@@ -20,6 +21,7 @@
       when: with_samba
     - role: geerlingguy.nfs
       when: with_nfs
+      become: true
 
   pre_tasks:
     - import_tasks: tasks/platform.yml
