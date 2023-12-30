@@ -6,6 +6,7 @@
     state: present
 
 - name: Remove all but default SSH config
+  become: true
   block:
     - name: Collect config files
       ansible.builtin.find:

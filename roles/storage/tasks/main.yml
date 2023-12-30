@@ -23,5 +23,5 @@
     src: '{{ item.ip }}:{{ item.dir }}'
     fstype: nfs
     state: mounted
-  loop: '{{ nfs }}'
-  when: nfs is defined
+  loop: '{{ nfs_volumes }}'
+  when: nfs_volumes is defined

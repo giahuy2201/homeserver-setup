@@ -2,9 +2,9 @@
 - hosts: tester
 
   roles:
-    - role: system
     - role: proxmox
       when: with_proxmox
+    - role: system
     - role: netplan
       when: with_netplan
     - role: cockpit
