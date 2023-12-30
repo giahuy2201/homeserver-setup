@@ -1,0 +1,10 @@
+---
+- name: Copy network config file
+  become: true
+  copy:
+    src: "{{ hostname }}.interfaces"
+    dest: /etc/network/interfaces
+    owner: root
+    group: root
+    mode: 0644
+  notify: reload interfaces

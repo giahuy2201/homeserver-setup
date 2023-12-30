@@ -1,0 +1,5 @@
+[Match]
+Driver=thunderbolt-net
+[Link]
+MACAddressPolicy=none
+Name=eno10

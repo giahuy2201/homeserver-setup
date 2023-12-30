@@ -1,0 +1,8 @@
+---
+- name: update initramfs
+  become: true
+  command: update-initramfs -k all -u
+
+- name: reload interfaces
+  become: true
+  command: ifreload -a

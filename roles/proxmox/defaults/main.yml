@@ -1,0 +1,10 @@
+pve_enterprise_sources:
+  - name: pve
+    file: pve-enterprise.list
+    url: https://enterprise.proxmox.com/debian/pve
+  - name: ceph
+    file: ceph.list
+    url: https://enterprise.proxmox.com/debian/ceph-quincy
+  - name: pbs
+    file: pbs-enterprise.list
+    url: https://enterprise.proxmox.com/debian/pbs

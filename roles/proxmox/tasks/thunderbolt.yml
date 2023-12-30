@@ -1,0 +1,10 @@
+---
+- name: Copy thunderbolt config file
+  become: true
+  copy:
+    src: 00-thunderbolt0.link
+    dest: /etc/systemd/network/00-thunderbolt0.link
+    owner: root
+    group: root
+    mode: 0644
+  notify: update initramfs
