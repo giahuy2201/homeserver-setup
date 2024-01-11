@@ -1,5 +1,5 @@
 ---
-- hosts: tester
+- hosts: '{{ target_host | default("tester") }}'
 
   roles:
     - role: proxmox
