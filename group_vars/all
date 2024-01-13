@@ -2,6 +2,7 @@
 
 raspberrypi: 'no'
 qemu_vm: 'no'
+lxc_container: 'no'
 
 hostname: server
 username: username

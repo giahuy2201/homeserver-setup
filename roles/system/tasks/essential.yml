@@ -28,6 +28,7 @@
   become: true
   hostname:
     name: '{{ hostname }}'
+  when: lxc_container == 'no'
 
 - name: Set timezone to {{ timezone }}
   become: true
