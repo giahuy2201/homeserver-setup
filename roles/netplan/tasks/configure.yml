@@ -21,7 +21,7 @@
     dest: /etc/netplan/00-ansible.yaml
     owner: root
     group: root
-    mode: 0644
+    mode: 0600
   notify: apply netplan
 
 - meta: flush_handlers
