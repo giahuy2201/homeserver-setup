@@ -10,9 +10,9 @@ password: password
 shell: /bin/bash
 
 with_serial: false
+with_networking: false
 with_wireguard: false
 with_proxmox: false
-proxmox_network: false
 proxmox_fake_subscription: false
 proxmox_thunderbolt: false
 with_cockpit: false

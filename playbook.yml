@@ -5,6 +5,8 @@
     - role: proxmox
       when: with_proxmox
     - role: system
+    - role: networking
+      when: with_networking
     - role: netplan
       when: with_netplan
     - role: cockpit

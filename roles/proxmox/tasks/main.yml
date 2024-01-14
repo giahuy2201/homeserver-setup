@@ -1,5 +1,4 @@
 ---
-- include_tasks: network.yml
 - include_tasks: no-subscription.yml
   when: proxmox_fake_subscription
 - include_tasks: thunderbolt.yml

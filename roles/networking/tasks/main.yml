@@ -1,0 +1,20 @@
+---
+- name: Copy network config file
+  become: true
+  copy:
+    src: "{{ hostname }}.interfaces"
+    dest: /etc/network/interfaces
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Restart system networking
+  become: true
+  service:
+    name: networking
+    state: restarted
+
+- name: Run Proxmox ifreload
+  become: true
+  command: ifreload -a
+  when: with_proxmox

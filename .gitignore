@@ -3,4 +3,4 @@
 /host_vars/*
 !host_vars/tester
 /roles/wireguard/files
-/roles/proxmox/files/*.interfaces
+/roles/networking/files/*.interfaces
