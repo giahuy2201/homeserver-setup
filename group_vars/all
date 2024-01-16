@@ -15,6 +15,7 @@ with_wireguard: false
 with_proxmox: false
 proxmox_fake_subscription: false
 proxmox_thunderbolt: false
+proxmox_vm_display_bochs_i915: false
 with_cockpit: false
 with_cockpit_pcp: false
 with_cockpit_networkmanager: false

@@ -1,0 +1,10 @@
+---
+- name: Copy bochs postloading i915 VM config
+  become: true
+  copy:
+    src: "i915.conf"
+    dest: /etc/modprobe.d/i915.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: update initramfs

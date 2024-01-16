@@ -3,3 +3,5 @@
   when: proxmox_fake_subscription
 - include_tasks: thunderbolt.yml
   when: proxmox_thunderbolt
+- include_tasks: i915-bochs.yml
+  when: proxmox_vm_display_bochs_i915
