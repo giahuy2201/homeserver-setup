@@ -3,6 +3,7 @@
   become: true
   user:
     name: '{{ username }}'
+    uid: 1000
     shell: '{{ shell }}'
     
 - name: Give user {{ username }} home folder permissions
@@ -17,12 +18,13 @@
   become: true
   group:
     name: '{{ username }}'
+    gid: 1000
     
 - name: 'Add {{ samba_group }} group'
   become: true
   group:
     name: '{{ samba_group }}'
-    gid: 1001
+    gid: 1002
   when: with_samba
 
 - name: 'Add docker group'

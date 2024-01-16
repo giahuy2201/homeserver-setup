@@ -21,6 +21,7 @@
       when: with_storage
     - role: vladgh.samba.server
       when: with_samba
+      become: true
     - role: geerlingguy.nfs
       when: with_nfs
       become: true
