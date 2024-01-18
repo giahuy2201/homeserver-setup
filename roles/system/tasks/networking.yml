@@ -13,8 +13,13 @@
   service:
     name: networking
     state: restarted
+  
+- name: Check if ifreload is available
+  stat:
+    path: /usr/sbin/ifreload
+  register: ifreload_executable
 
 - name: Run Proxmox ifreload
   become: true
   command: ifreload -a
-  when: with_proxmox
+  when: ifreload_executable.stat.exists

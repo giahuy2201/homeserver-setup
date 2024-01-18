@@ -7,5 +7,7 @@
 - include_tasks: serial.yml
   when: with_serial
 - include_tasks: qemu.yml
+- include_tasks: networking.yml
+  when: with_networking and 'networking' in services
 - include_tasks: dotfiles.yml
   when: with_dotfiles
