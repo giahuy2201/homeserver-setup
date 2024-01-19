@@ -71,3 +71,6 @@ containers_dir: '/home/{{ username }}/containers'
 
 migrate_containers: 'no'
 compose_up: 'no'
+
+# Samba
+samba_macos_icon: 'MacPro7,1@ECOLOR=226,226,224' # full list: https://askubuntu.com/questions/1109810/ubuntu-18-10-samba-4-8-4-smb-conf-what-are-the-valid-values-for-fruitmodel/1144356#1144356
