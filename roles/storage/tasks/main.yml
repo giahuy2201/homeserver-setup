@@ -21,7 +21,7 @@
   ansible.posix.mount:
     path: '/mnt/{{ item.name }}'
     src: '{{ item.ip }}:{{ item.dir }}'
-    fstype: nfs
+    fstype: nfs4
     state: mounted
   loop: '{{ nfs_volumes }}'
   when: nfs_volumes is defined
