@@ -17,6 +17,8 @@
       when: with_coral
     - role: storage
       when: with_storage
+    - role: nginx
+      when: with_nginx
     - role: vladgh.samba.server
       when: with_samba
       become: true

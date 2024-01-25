@@ -1,0 +1,8 @@
+---
+- name: Install Nginx package
+  become: true
+  package:
+    name:
+      - httpd
+      - mariadb-server
+    state: latest
