@@ -8,11 +8,16 @@
     group: root
     mode: 0644
 
+- name: Check if networking service exists
+  stat: path=/etc/init.d/networking
+  register: networking_service_file
+
 - name: Restart system networking
   become: true
   service:
     name: networking
     state: restarted
+  when: networking_service_file.stat.exists
   
 - name: Check if ifreload is available
   stat:
