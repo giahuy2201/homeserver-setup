@@ -27,6 +27,7 @@ with_docker: false
 with_storage: false
 with_samba: false
 with_nginx: false
+with_promtail: false
 with_nfs: false
 allow_restart: 'no'
 
@@ -63,6 +64,10 @@ essential_packages:
 extra_packages:
   - smartmontools
   - powertop
+
+# custom packages
+pve_fake_subscription_url: https://github.com/Jamesits/pve-fake-subscription/releases/download/v0.0.9/pve-fake-subscription_0.0.9+git-1_all.deb
+promtail_url: https://github.com/grafana/loki/releases/download/v2.9.4/promtail_2.9.4_amd64.deb
 
 # DOCKER
 

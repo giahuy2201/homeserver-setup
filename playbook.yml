@@ -19,6 +19,8 @@
       when: with_storage
     - role: nginx
       when: with_nginx
+    - role: promtail
+      when: with_promtail
     - role: vladgh.samba.server
       when: with_samba
       become: true

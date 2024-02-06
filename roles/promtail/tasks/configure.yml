@@ -1,0 +1,15 @@
+---
+- name: Copy Promtail config file from NAS
+  become: true
+  copy:
+    src: '{{ local_config_backup_dir }}/promtail/'
+    dest: /etc/promtail
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Reload Promtail service
+  become: true
+  service:
+    name: promtail
+    state: reloaded

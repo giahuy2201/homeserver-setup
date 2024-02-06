@@ -1,0 +1,23 @@
+---
+- name: Install Rsyslog package
+  become: true
+  package:
+    name:
+      - rsyslog
+    state: latest
+
+- name: Check if Promtail is installed
+  command: dpkg -l promtail
+  register: promtail_installed
+  ignore_errors: True
+  check_mode: False
+  changed_when: false
+
+- name: Install Promtail
+  become: true
+  block:
+    - get_url:
+        url: '{{ promtail_url }}'
+        dest: /root/promtail.deb
+    - command: dpkg -i promtail.deb
+  when: promtail_installed.rc == 1
