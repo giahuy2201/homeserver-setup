@@ -19,5 +19,5 @@
     - get_url:
         url: '{{ promtail_url }}'
         dest: /root/promtail.deb
-    - command: dpkg -i promtail.deb
+    - command: dpkg -i /root/promtail.deb
   when: promtail_installed.rc == 1
