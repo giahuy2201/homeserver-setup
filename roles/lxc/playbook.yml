@@ -1,0 +1,5 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - import_tasks: "tasks/{{ task_name }}.yml"
