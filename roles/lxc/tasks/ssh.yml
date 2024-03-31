@@ -1,0 +1,62 @@
+---
+- name: Remove all but default SSH config
+  become: true
+  block:
+    - name: Collect config files
+      ansible.builtin.find:
+        paths: "/etc/ssh/sshd_config.d"
+        hidden: true
+        recurse: true
+        file_type: any
+      register: collected_files
+    - name: Remove them
+      file:
+        path: "{{ item.path }}"
+        state: absent
+      with_items: "{{ collected_files.files }}"
+
+- name: Disable SSH password auth
+  become: true
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^PasswordAuthentication"
+    line: "PasswordAuthentication no"
+    state: present
+    backup: yes
+
+- name: Disable SSH Challenge Response Authentication
+  become: true
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^ChallengeResponseAuthentication"
+    line: "ChallengeResponseAuthentication no"
+    state: present
+    backup: yes
+
+- name: Disable SSH GSSAPIAuthentication
+  become: true
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^GSSAPIAuthentication"
+    line: "GSSAPIAuthentication no"
+    state: present
+    backup: yes
+
+- name: Disable SSH X11Forwarding
+  become: true
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^X11Forwarding"
+    line: "X11Forwarding no"
+    state: present
+    backup: yes
+
+- name: Enable SSH public key auth
+  become: true
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^PubkeyAuthentication"
+    line: "PubkeyAuthentication yes"
+    state: present
+    backup: yes
+  notify: restart sshd
