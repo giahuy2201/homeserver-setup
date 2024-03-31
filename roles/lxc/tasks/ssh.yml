@@ -59,4 +59,9 @@
     line: "PubkeyAuthentication yes"
     state: present
     backup: yes
-  notify: restart sshd
+
+- name: restart sshd
+  become: true
+  service:
+    name: sshd
+    state: restarted
