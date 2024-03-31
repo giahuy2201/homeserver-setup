@@ -6,7 +6,7 @@
       - nginx
     state: latest
 
-- name: Reload Nginx service
+- name: Ensure Nginx service is running
   become: true
   service:
     name: nginx
