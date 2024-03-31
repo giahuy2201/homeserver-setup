@@ -5,3 +5,9 @@
     name:
       - nginx
     state: latest
+
+- name: Reload Nginx service
+  become: true
+  service:
+    name: nginx
+    state: restarted

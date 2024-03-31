@@ -26,7 +26,6 @@ with_coral: false
 with_docker: false
 with_storage: false
 with_samba: false
-with_nginx: false
 with_promtail: false
 with_nfs: false
 allow_restart: 'no'
