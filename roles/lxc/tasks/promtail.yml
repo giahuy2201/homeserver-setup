@@ -17,7 +17,13 @@
   become: true
   block:
     - get_url:
-        url: '{{ promtail_url }}'
+        url: "{{ promtail_url }}"
         dest: /root/promtail.deb
     - command: dpkg -i /root/promtail.deb
   when: promtail_installed.rc == 1
+
+- name: Ensure Promtail service is running
+  become: true
+  service:
+    name: promtail
+    state: restarted

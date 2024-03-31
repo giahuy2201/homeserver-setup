@@ -17,8 +17,6 @@
       when: with_coral
     - role: storage
       when: with_storage
-    - role: promtail
-      when: with_promtail
     - role: vladgh.samba.server
       when: with_samba
       become: true
