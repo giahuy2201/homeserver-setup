@@ -47,12 +47,14 @@ gpu_passthrough: 'no'
 
 # PACKAGES
 
+minimal_packages:
+  - htop
+  - neovim
+
 essential_packages:
   - sudo
-  - neovim
   - git
   - neofetch
-  - htop
   - btop
   - iftop
   - net-tools
