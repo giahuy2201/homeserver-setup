@@ -1,0 +1,7 @@
+---
+- name: Install minimal packages
+  become: true
+  package:
+    name: "{{ minimal_packages }}"
+    state: present
+    update_cache: yes
