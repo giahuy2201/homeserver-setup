@@ -65,6 +65,7 @@ essential_packages:
 extra_packages:
   - smartmontools
   - powertop
+  - ethtool
 
 # custom packages
 pve_fake_subscription_url: https://github.com/Jamesits/pve-fake-subscription/releases/download/v0.0.9/pve-fake-subscription_0.0.9+git-1_all.deb
