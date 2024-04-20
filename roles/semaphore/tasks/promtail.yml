@@ -1,11 +1,4 @@
 ---
-- name: Install Rsyslog package
-  become: true
-  package:
-    name:
-      - rsyslog
-    state: latest
-
 - name: Check if Promtail is installed
   command: dpkg -l promtail
   register: promtail_installed
