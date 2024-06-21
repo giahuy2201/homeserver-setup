@@ -4,6 +4,7 @@
   roles:
     - role: proxmox
       when: with_proxmox
+    - role: packages
     - role: system
     - role: netplan
       when: with_netplan
