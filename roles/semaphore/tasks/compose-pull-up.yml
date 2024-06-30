@@ -1,0 +1,5 @@
+
+- name: Upgrade and launch all Docker containers
+  community.docker.docker_compose:
+    project_src: '{{ containers_dir }}'
+    pull: true
