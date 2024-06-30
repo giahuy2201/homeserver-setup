@@ -3,5 +3,4 @@
 - hosts: '{{ target_hosts | default("lxc") }}'
   become: true
   tasks:
-    - import_tasks: "tasks/ssh.yml"
     - import_tasks: "tasks/{{ task_name }}.yml"
