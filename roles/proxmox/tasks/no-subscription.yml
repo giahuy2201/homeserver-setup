@@ -8,6 +8,16 @@
     backup: yes
   loop: '{{ pve_enterprise_sources }}'
 
+- name: Add other Proxmox sources
+  become: true
+  lineinfile:
+    dest: '/etc/apt/sources.list.d/{{ item.file }}'
+    regexp: '^deb {{ item.url }} {{ ansible_distribution_release }} {{ item.name }}'
+    state: present
+    backup: yes
+    create: true
+  loop: '{{ pve_other_sources }}'
+
 - name: Check if pve-fake-subscription is installed
   command: dpkg -l pve-fake-subscription
   register: pve_fake_subscription_installed
