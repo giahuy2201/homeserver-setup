@@ -1,4 +1,4 @@
 
 - name: Launch all Docker containers
   community.docker.docker_compose:
-    project_src: '/mnt/Config/{{ ansible_hostname }}/containers/'
+    project_src: '{{ containers_dir | default("/mnt/Config/{{ ansible_hostname }}/containers/") }}'
