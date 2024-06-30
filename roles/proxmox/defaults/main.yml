@@ -8,3 +8,8 @@ pve_enterprise_sources:
   - name: pbs
     file: pbs-enterprise.list
     url: https://enterprise.proxmox.com/debian/pbs
+
+pve_other_sources:
+  - name: pve-no-subscription
+    file: pve-no-subscription.list
+    url: http://download.proxmox.com/debian/pve
