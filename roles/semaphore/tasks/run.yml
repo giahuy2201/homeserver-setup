@@ -1,0 +1,6 @@
+---
+- name: Run a custom shell command
+  shell:
+    chdir: '{{ shell_dir }}'
+    cmd: '{{ shell_cmd }}'
+  
