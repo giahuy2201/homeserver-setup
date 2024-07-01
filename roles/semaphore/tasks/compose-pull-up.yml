@@ -7,11 +7,11 @@
 - name: Upgrade and launch all Docker containers
   community.docker.docker_compose_v2:
     project_src: '/mnt/Config/{{ ansible_hostname }}/containers'
-    pull: true
+    pull: always
   when: containers_folder.stat.exists
 
 - name: Upgrade and launch Docker containers in {{ containers_dir }}
   community.docker.docker_compose_v2:
     project_src: '{{ containers_dir | default("/mnt/storage/containers") }}'
-    pull: true
+    pull: always
   when: not containers_folder.stat.exists
