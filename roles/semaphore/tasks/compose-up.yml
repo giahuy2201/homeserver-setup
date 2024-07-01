@@ -1,4 +1,15 @@
+---
+- name: Check if containers folder exists
+  stat:
+    path: '/mnt/Config/{{ ansible_hostname }}/containers'
+  register: containers_folder
 
 - name: Launch all Docker containers
-  community.docker.docker_compose:
-    project_src: '{{ containers_dir | default("/mnt/Config/{{ ansible_hostname }}/containers/") }}'
+  community.docker.docker_compose_v2:
+    project_src: '/mnt/Config/{{ ansible_hostname }}/containers'
+  when: containers_folder.exists
+
+- name: Launch Docker containers in {{ containers_dir }}
+  community.docker.docker_compose_v2:
+    project_src: '{{ containers_dir }}'
+  when: not containers_folder.exists
