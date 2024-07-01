@@ -1,5 +1,5 @@
 ---
-- name: Restart container {{ container_name }}
+- name: Remove container {{ container_name }}
   community.docker.docker_container:
     name: '{{ container_name }}'
     state: absent
