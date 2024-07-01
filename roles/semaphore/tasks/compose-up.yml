@@ -7,9 +7,11 @@
 - name: Launch all Docker containers
   community.docker.docker_compose_v2:
     project_src: '/mnt/Config/{{ ansible_hostname }}/containers'
+    remove_orphans: true
   when: containers_folder.stat.exists
 
 - name: Launch Docker containers in {{ containers_dir }}
   community.docker.docker_compose_v2:
     project_src: '{{ containers_dir }}'
+    remove_orphans: true
   when: not containers_folder.stat.exists
