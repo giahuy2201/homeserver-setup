@@ -8,10 +8,10 @@
   community.docker.docker_compose_v2:
     project_src: '/mnt/Config/{{ ansible_hostname }}/containers'
     pull: true
-  when: containers_folder.exists
+  when: containers_folder.stat.exists
 
 - name: Upgrade and launch Docker containers in {{ containers_dir }}
   community.docker.docker_compose_v2:
     project_src: '{{ containers_dir }}'
     pull: true
-  when: containers_folder.exists
+  when: not containers_folder.stat.exists
