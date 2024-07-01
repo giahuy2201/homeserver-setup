@@ -12,6 +12,6 @@
 
 - name: Launch Docker containers in {{ containers_dir }}
   community.docker.docker_compose_v2:
-    project_src: '{{ containers_dir }}'
+    project_src: '{{ containers_dir | default("/mnt/storage/containers") }}'
     remove_orphans: true
   when: not containers_folder.stat.exists
