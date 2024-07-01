@@ -4,3 +4,5 @@
   become: true
   tasks:
     - import_tasks: "tasks/{{ task_name }}.yml"
+  pre_tasks:
+    - import_tasks: "../../tasks/platform.yml"
