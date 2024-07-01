@@ -8,13 +8,11 @@
     state: present
 
 - name: Install docker pip module
-  become: true
   pip:
     name: 
       - docker
       - docker-compose
 
 - name: Pull docker images and launch containers
-  become: true
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: '{{ containers_dir }}'
