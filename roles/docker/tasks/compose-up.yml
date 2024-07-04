@@ -10,7 +10,7 @@
     remove_orphans: true
   when: containers_folder.stat.exists
 
-- name: Launch Docker containers in {{ containers_dir }}
+- name: Launch Docker containers in {{ containers_dir | default("/mnt/storage/containers") }}
   community.docker.docker_compose_v2:
     project_src: '{{ containers_dir | default("/mnt/storage/containers") }}'
     remove_orphans: true

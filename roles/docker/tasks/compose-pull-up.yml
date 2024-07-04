@@ -10,7 +10,7 @@
     pull: always
   when: containers_folder.stat.exists
 
-- name: Upgrade and launch Docker containers in {{ containers_dir }}
+- name: Upgrade and launch Docker containers in {{ containers_dir | default("/mnt/storage/containers") }}
   community.docker.docker_compose_v2:
     project_src: '{{ containers_dir | default("/mnt/storage/containers") }}'
     pull: always
