@@ -10,6 +10,7 @@
 - name: Update and upgrade packages with DNF
   become: true
   dnf:
+    name: "*"
     update_cache: yes
     state: latest
   when: ansible_os_family == 'RedHat'
