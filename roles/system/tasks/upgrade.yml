@@ -12,6 +12,11 @@
   dnf:
     update_cache: yes
     state: latest
+  when: ansible_os_family == 'RedHat'
+
+- name: Autoremove unneeded packages with DNF
+  become: true
+  dnf:
     autoremove: yes
   when: ansible_os_family == 'RedHat'
 
