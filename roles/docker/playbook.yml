@@ -1,6 +1,6 @@
 ---
 # To reuse previously written tasks as a playbook with Semaphore
-- hosts: '{{ target_hosts }}'
+- hosts: '{{ target_hosts | default("all") }}'
   become: true
   tasks:
     - import_tasks: "tasks/{{ task_name }}.yml"
