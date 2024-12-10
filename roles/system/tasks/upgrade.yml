@@ -1,10 +1,19 @@
 ---
-- name: Update and upgrade packages
+- name: Update and upgrade packages with APT
   become: true
   apt:
     update_cache: yes
     upgrade: yes
     autoremove: yes
+  when: ansible_os_family == 'Debian'
+
+- name: Update and upgrade packages with DNF
+  become: true
+  dnf:
+    update_cache: yes
+    state: latest
+    autoremove: yes
+  when: ansible_os_family == 'RedHat'
 
 - name: Check if reboot required
   stat:
