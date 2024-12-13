@@ -1,19 +1,12 @@
 ---
-- name: Check if NFS containers folder exists
+- name: Check if containers folder at {{ containers_path }} exists
   stat:
-    path: '/mnt/Config/{{ ansible_hostname }}/containers'
-  register: containers_folder_nfs
+    path: '{{ containers_path }}'
+  register: containers_folder
 
 - name: Upgrade and launch all Docker containers
   community.docker.docker_compose_v2:
-    project_src: '/mnt/Config/{{ ansible_hostname }}/containers'
+    project_src: '{{ containers_path }}'
     pull: always
     remove_orphans: true
-  when: containers_folder_nfs.stat.exists
-
-- name: Upgrade and launch Docker containers in {{ containers_dir }}
-  community.docker.docker_compose_v2:
-    project_src: '{{ containers_dir }}'
-    pull: always
-    remove_orphans: true
-  when: not containers_folder_nfs.stat.exists and containers_dir is defined and containers_dir != ''
+  when: containers_folder.stat.exists
