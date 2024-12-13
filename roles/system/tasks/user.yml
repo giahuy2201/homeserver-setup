@@ -39,14 +39,16 @@
     name: libvirt
   when: with_cockpit_machines
 
-- name: Setup login user with group sudo and {{ username }}
+- name: Setup login user with group sudo, wheel and {{ username }}
   become: true
   user:
     name: "{{ username }}"
     groups: 
       - sudo
+      - wheel
       - '{{ username }}'
     append: true
+  ignore_errors: true
 
 - name: Ensure login user ({{ username }}) is in {{ samba_group }} group
   become: true
