@@ -1,7 +1,7 @@
 ---
 - name: Fall back to containers folder at /mnt/Config/{{ ansible_hostname }}/containers
-  set_facts:
-    containers_path: '/mnt/Config/{{ ansible_hostname }}/containers'
+  set_fact:
+    containers_path: /mnt/Config/{{ ansible_hostname }}/containers
   when: containers_path is undefined
 
 - name: Check if containers folder at {{ containers_path }} exists
