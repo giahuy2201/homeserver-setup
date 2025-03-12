@@ -5,3 +5,5 @@
   when: proxmox_thunderbolt
 - include_tasks: i915-bochs.yml
   when: proxmox_vm_display_bochs_i915
+- include_tasks: disable-wear-services.yml
+  when: proxmox_disable_wear_services

@@ -1,0 +1,8 @@
+---
+- name: Disable PVE ssd-wear-causing services
+  become: true
+  service:
+    name: "{{ item }}"
+    state: stopped
+    enabled: false
+  loop: "{{ disable_wear_services }}"
